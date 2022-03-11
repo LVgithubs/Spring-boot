@@ -1,0 +1,48 @@
+{{> /layout/header}}
+    
+
+<div class="container mt-3"> <!-- container, mt-3은 css 클래스임!! --> <!-- 게시글 아이템 시작 --> 
+  <div class="container mt-3 container p-5 my-5 bg-dark text-white">
+    <h2 > <pre>PCR 검사 가능 병원 조회</pre></h2>
+    <p> <kbd>부산 사하구</kbd> <kbd>PCR 검사 가능 병원</kbd>을 조회합니다.</p>            
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>주소</th>
+          <th>운영시작일자</th>
+          <th>PCR 가능여부</th>
+          <th>RAT 가능여부</th>
+          <th>요양종별코드</th>
+          <th>시군구명</th>
+          <th>시도명</th>
+          <th>요양기관명</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#hospitals}}
+        <tr>
+          <td>{{addr}}</td>
+          <td>{{mgtStaDd}}</td>
+          <td>{{pcrPsblYn}}</td>
+          <td>{{ratPsblYn}}</td>
+          <td>{{recuClCd}}</td>
+          <td>{{sgguCdNm}}</td>
+          <td>{{sidoCdNm}}</td>
+          <td>{{yadmNm}}</td>
+        </tr>
+        {{/hospitals}}
+
+      </tbody>
+    </table>
+  </div><!-- 게시글 아이템 끝 --> <!-- 페이징 시작 --> 
+          <ul class="pagination justify-content-center"> 
+              <li class="page-item disabled">
+                  <a class="page-link" href="#">이전</a></li> 
+                  <li class="page-item"><a class="page-link" href="#">다음</a>
+                </li> 
+                </ul> <!-- 페이징 시작 --> 
+            </div>
+
+
+{{> /layout/footer}}

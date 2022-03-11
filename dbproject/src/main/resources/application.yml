@@ -1,0 +1,30 @@
+server:
+ port: 8080
+ servlet:
+    context-path: /
+    encoding:
+     charset: utf-8
+
+
+
+
+#hibernate 는 SQL을 직접 사용하지 않고 메서드 만으로 쿼리를 사용하게 해주는 라이브러리
+#ddl-auto : create 는 생성
+#none은 아무것도 간섭안함
+#update 는 업데이트!
+spring:
+  datasource:
+      url: jdbc:mariadb://localhost:3306/greendb
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: green
+      password: green1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  output:
+     ansi:
+        enabled: always
+
