@@ -43,10 +43,8 @@ public class HospitalController {
 
         // 1. HospitalRepository의 findAll() 호출
         // 2. model에 담기
-        // model.addAttribute("hospitals", hospitalRepository.findAll());
-        model.addAttribute("hospitals", hosList);
-
-        // 3. mustache 파일에 뿌리기
+        model.addAttribute("hospitals", hospitalRespository.findAll());
+        // model.addAttribute("hospitals", hosList);
 
         return "hospital/list";
     }
