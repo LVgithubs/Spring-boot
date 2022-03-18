@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -146,11 +148,26 @@ public class UserController {
         return "user/updateForm";
     }
 
+    // username(X), password(O), email(O)
+    // password=1234&email=ssar@nate.com (x-www-form-urlencoded)
+    // { "password" : "1234", "email" : "ssar@nate.com" } (application/json
+    // json 을 받을 것이기 때문에 Spring 이 데이터를 받았는지 확인
+    //
+
     // 유저수정 - 로그인O
     @PutMapping("/s/user/{id}")
-    public String update(@PathVariable Integer id) {
+    public String update(@PathVariable Integer id, @RequestBody User user) {
+        if (principal == null) {
+            return "error/page1";
+        }
+        if (principal.getId() != id) {
+            return "error/page1";
+        }
 
-        return "redirect:/user/" + id;
+        User userEntity = userService.유저수정(id, user);
+        session.setAttribute("principal", userEntity);
+
+        return "redirect:/s/user/" + id;
     }
 
 }

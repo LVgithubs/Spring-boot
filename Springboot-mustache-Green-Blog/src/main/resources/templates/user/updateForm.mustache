@@ -24,6 +24,32 @@
 
 <script>
     function update() {
+        //jquery 로 password, email. 찾아서 자바 스크립트 오브젝트로 만들기
+        //2. 자바 스크립트 오브젝트를 json으로 변환하기]
+        //3. fetch 요청하기
+        //1)content-type을 json 으로 설정하기
+        //2) put 메서드로 변경하기
+        //3)body 데이터 실어 보내기
+        //4)ResponseDto로 응답받아서 code가 1이면, alert 창으로 수정 성공 띄우기
+        //5) 수정 성공 메시지 이후에 / 메인 화면으로 이동하기 -location.href="/"
+        password: $("#password").val(),
+        email: $("#email").val()
+        console.log(user);
+
+        let userJson = JSON.stringify(user);
+        console.log(userJson);
+
+        let id = $("#id").val();
+        let response = await fetch("/s/user/" +id, {
+
+            method:"PUT",
+            body: userJson,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+
         let usernameDom = document.querySelector("#username");
         console.log(usernameDom);
     }

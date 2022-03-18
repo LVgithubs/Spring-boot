@@ -46,7 +46,17 @@ public class UserService {
     }
 
     @Transactional
-    public void 유저수정() {
+    public void 유저수정(Integer id, User user) {
+        Optional<User> userOp = userRepository.findById(id);
 
+        if (userOp.isPresent()) { // 영속화 됨
+            User userEntity = userOp.get();
+            userEntity.setPassword(user.getPassword());
+            userEntity.setEmail(user.getEmail());
+            return userEntity;
+        } // 트랜잭션 종료 +영속화 되어 있는 것들 전부 더티 체킹(변경 감지해서 DB에 flush)
+          // 영속화 안됨
+        return null;
     }
+
 }
